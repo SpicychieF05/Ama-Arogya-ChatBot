@@ -1,0 +1,129 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - ask_fever
+  - ask_headache
+  - ask_cough_cold
+  - ask_stomach_pain
+  - ask_pregnancy_care
+  - ask_child_vaccination
+  - ask_diabetes
+  - ask_blood_pressure
+  - ask_first_aid
+  - ask_general_health
+  # Vector-borne diseases
+  - ask_malaria
+  - ask_dengue
+  - ask_chikungunya
+  - ask_vector_prevention
+  - ask_fever_emergency
+  # Water-borne diseases
+  - ask_diarrhea
+  - ask_typhoid
+  - ask_cholera
+  - ask_hepatitis
+  - ask_waterborne_prevention
+
+entities:
+  - symptom
+  - body_part
+  - age
+  - duration
+
+slots:
+  symptom:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: symptom
+
+  age:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: age
+
+responses:
+  utter_greet:
+    - text: "नमस्ते! मैं अमा आरोग्य हूं, आपका स्वास्थ्य सहायक। / Namaste! I am Ama Arogya, your health assistant. How can I help you today?"
+
+  utter_fever_advice:
+    - text: "बुखार के लिए: / For fever:\n• पर्याप्त आराम करें / Take adequate rest\n• बहुत सारा पानी पिएं / Drink plenty of water\n• पैरासिटामोल ले सकते हैं (500mg हर 6 घंटे में) / Take paracetamol 500mg every 6 hours\n• अगर बुखार 3 दिन से ज्यादा रहे तो डॉक्टर से मिलें / If fever persists beyond 3 days, consult a doctor\n\nओडिया में: ଜ୍ବର ପାଇଁ ଯଥେଷ୍ଟ ବିଶ୍ରାମ ନିଅନ୍ତୁ ଏବଂ ପାଣି ପିଅନ୍ତୁ।"
+
+  utter_headache_advice:
+    - text: "सिरदर्द के लिए: / For headache:\n• आराम करें और आंखें बंद करके लेटें / Rest with closed eyes\n• माथे पर ठंडी पट्टी रखें / Apply cold compress on forehead\n• पर्याप्त पानी पिएं / Drink adequate water\n• तनाव कम करें / Reduce stress\n• अगर दर्द बहुत ज्यादा हो तो दर्द निवारक दवा लें / Take pain reliever if severe\n\nओडिया में: ମାଥା ବଥା ପାଇଁ ବିଶ୍ରାମ ନିଅନ୍ତୁ ଏବଂ ଠଣ୍ଡା ପଟି ଲଗାନ୍ତୁ।"
+
+  utter_cough_cold_advice:
+    - text: "खांसी-जुकाम के लिए: / For cough and cold:\n• गर्म पानी पिएं / Drink warm water\n• शहद और अदरक का काढ़ा लें / Take honey-ginger decoction\n• भाप लें / Take steam inhalation\n• नमक के पानी से गरारा करें / Gargle with salt water\n• आराम करें / Take rest\n\nओडिया में: ଖାସି ଓ ସର୍ଦି ପାଇଁ ଗରମ ପାଣି ପିଅନ୍ତୁ ଓ ମହୁ ଅଦା ଖାଆନ୍ତୁ।"
+
+  utter_stomach_pain_advice:
+    - text: "पेट दर्द के लिए: / For stomach pain:\n• हल्का खाना खाएं / Eat light food\n• अजवाइन और नमक का पानी पिएं / Drink ajwain and salt water\n• पेट की सिकाई करें / Apply warm compress\n• तली हुई चीजें न खाएं / Avoid fried foods\n• अगर दर्द बना रहे तो डॉक्टर से मिलें / If pain persists, see doctor\n\nओडिया में: ପେଟ ବଥା ପାଇଁ ହାଲୁକା ଖାଦ୍ୟ ଖାଆନ୍ତୁ ଓ ଗରମ ସେକ ଦିଅନ୍ତୁ।"
+
+  utter_pregnancy_care:
+    - text: "गर्भावस्था देखभाल: / Pregnancy care:\n• नियमित चेकअप कराएं / Regular checkups\n• फोलिक एसिड और आयरन की गोलियां लें / Take folic acid and iron tablets\n• पौष्टिक भोजन करें / Eat nutritious food\n• धूम्रपान और शराब से बचें / Avoid smoking and alcohol\n• पर्याप्त आराम करें / Take adequate rest\n\nओडिया में: ଗର୍ଭାବସ୍ଥାରେ ନିୟମିତ ଡାକ୍ତରୀ ପରୀକ୍ଷା କରାନ୍ତୁ ଓ ପୁଷ୍ଟିକର ଖାଦ୍ୟ ଖାଆନ୍ତୁ।"
+
+  utter_vaccination_schedule:
+    - text: "बच्चों का टीकाकरण: / Child vaccination schedule:\n• जन्म के समय: BCG, OPV, Hepatitis B\n• 6 सप्ताह: DPT, OPV, Hepatitis B\n• 10 सप्ताह: DPT, OPV\n• 14 सप्ताह: DPT, OPV\n• 9 महीने: Measles\n• 16-24 महीने: DPT, OPV, Measles\n\nओडିया में: ଶିଶୁ ଟିକାକରଣ ସମୟ ସାରଣୀ ଅନୁସାରେ ସମସ୍ତ ଟିକା ଦିଅନ୍ତୁ।"
+
+  utter_diabetes_care:
+    - text: "मधुमेह की देखभाल: / Diabetes care:\n• नियमित ब्लड शुगर चेक करें / Regular blood sugar monitoring\n• मीठा कम खाएं / Reduce sugar intake\n• नियमित व्यायाम करें / Regular exercise\n• दवा समय पर लें / Take medicines on time\n• डॉक्टर से नियमित मिलते रहें / Regular doctor consultations\n\nओडिया में: ମଧୁମେହ ପାଇଁ ଚିନି କମ୍ ଖାଆନ୍ତୁ ଓ ନିୟମିତ ବ୍ୟାୟାମ କରନ୍ତୁ।"
+
+  utter_blood_pressure_advice:
+    - text: "रक्तचाप नियंत्रण: / Blood pressure control:\n• नमक कम खाएं / Reduce salt intake\n• तनाव कम करें / Reduce stress\n• नियमित व्यायाम करें / Regular exercise\n• धूम्रपान छोड़ें / Quit smoking\n• वजन नियंत्रित रखें / Maintain healthy weight\n\nओडिया में: ରକ୍ତଚାପ ନିୟନ୍ତ୍ରଣ ପାଇଁ ଲୁଣ କମ୍ ଖାଆନ୍ତୁ ଓ ନିୟମିତ ବ୍ୟାୟାମ କରନ୍ତୁ।"
+
+  utter_first_aid:
+    - text: "प्राथमिक चिकित्सा: / First aid:\n• कट-छोटी चोट: साफ कपड़े से दबाएं / For cuts: Press with clean cloth\n• जलने पर: ठंडे पानी से धोएं / For burns: Rinse with cold water\n• चक्कर आने पर: सिर नीचे करके बैठाएं / For dizziness: Sit with head down\n• दम घुटने पर: पीठ पर थपकी दें / For choking: Pat on back\n• तुरंत डॉक्टर या 108 पर कॉल करें / Call doctor or 108 immediately\n\nओডିया में: ପ୍ରଥମିକ ଚିକିତ୍ସା ପାଇଁ ସଫା କପଡ଼ା ବ୍ୟବହାର କରନ୍ତୁ।"
+
+  utter_general_health:
+    - text: "सामान्य स्वास्थ्य सुझाव: / General health tips:\n• संतुलित आहार लें / Eat balanced diet\n• नियमित व्यायाम करें / Exercise regularly\n• पर्याप्त नींद लें (7-8 घंटे) / Get adequate sleep (7-8 hours)\n• तनाव कम करें / Manage stress\n• धूम्रपान न करें / Don't smoke\n• भरपूर पानी पिएं / Drink plenty of water\n\nओडिया में: ସ୍ବାସ୍ଥ୍ୟ ପାଇଁ ସନ୍ତୁଳିତ ଖାଦ୍ୟ ଓ ନିୟମିତ ବ୍ୟାୟାମ କରନ୍ତୁ।"
+
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+    - text: "Did that help you? क्या यह मददगार था? / ଏହା ସାହାଯ୍ୟକାରୀ ଥିଲା କି?"
+
+  utter_happy:
+    - text: "Great! I'm glad I could help! / खुशी है कि मैं आपकी मदद कर सका! / ମୁଁ ଆପଣଙ୍କର ସାହାଯ୍ୟ କରିପାରି ଖୁସି!"
+
+  utter_goodbye:
+    - text: "स्वस्थ रहें! / Stay healthy! / ସୁସ୍ଥ ରୁହନ୍ତୁ! Take care!"
+
+  utter_iamabot:
+    - text: "I am Ama Arogya, an AI health assistant powered by Rasa, designed to help people in Odisha with health guidance in multiple languages."
+
+  utter_default:
+    - text: "I didn't understand that. Can you please ask about health-related topics like fever, headache, pregnancy care, vaccination, etc.? / मुझे समझ नहीं आया। कृपया स्वास्थ्य संबंधी प्रश्न पूछें। / ମୁଁ ବୁଝିପାରିଲି ନାହିଁ। ଦୟାକରି ସ୍ବାସ୍ଥ୍ୟ ସମ୍ବନ୍ଧୀୟ ପ୍ରଶ୍ନ ପଚାରନ୍ତୁ।"
+
+actions:
+  - utter_greet
+  - utter_fever_advice
+  - utter_headache_advice
+  - utter_cough_cold_advice
+  - utter_stomach_pain_advice
+  - utter_pregnancy_care
+  - utter_vaccination_schedule
+  - utter_diabetes_care
+  - utter_blood_pressure_advice
+  - utter_first_aid
+  - utter_general_health
+  - utter_cheer_up
+  - utter_did_that_help
+  - utter_happy
+  - utter_goodbye
+  - utter_iamabot
+  - utter_default
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

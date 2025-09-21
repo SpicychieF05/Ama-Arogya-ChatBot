@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ama Arogya - Odisha Health Chatbot Demo</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="https://res.cloudinary.com/dlxybta5a/image/upload/v1758306196/ama-arogya-logo_frizmd.png"
+                    alt="Ama Arogya Logo" class="logo-img">
+                <span>Ama Arogya</span>
+            </div>
+            <nav class="nav" id="nav">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#demo" class="nav-link">Live Demo</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Ama Arogya</h1>
+                    <p class="hero-subtitle">AI-Powered Health Assistant for Rural Odisha</p>
+                    <p class="hero-description">
+                        Bridging healthcare gaps with multilingual AI support. Get instant health guidance
+                        in Odia, Hindi, and English through WhatsApp and SMS.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Languages</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Available</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">80%+</span>
+                            <span class="stat-label">Accuracy</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="scrollToDemo()">
+                            <i class="fas fa-comments"></i>
+                            Try Live Demo
+                        </button>
+                        <button class="btn btn-secondary"
+                            onclick="window.open('https://github.com/SpicychieF05/Odisha_ChatBot', '_blank')">
+                            <i class="fab fa-github"></i>
+                            View on GitHub
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image">
+                        <img src="https://res.cloudinary.com/dlxybta5a/image/upload/v1758305472/Picsart_25-09-19_22-28-57-764-removebg-preview_zcxwt8.png"
+                            alt="Ama Arogya Health Assistant" class="hero-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Multilingual Support</h3>
+                    <p>Communicates in Odia, Hindi, and English to serve diverse communities across Odisha.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>Symptom Checker</h3>
+                    <p>Provides initial assessment of symptoms and guidance on when to seek medical attention.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <h3>Vaccination Info</h3>
+                    <p>Complete vaccination schedules and reminders for children and adults.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h3>Maternal Care</h3>
+                    <p>Pregnancy guidance, prenatal care tips, and newborn health information.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp Integration</h3>
+                    <p>Accessible through WhatsApp for easy reach in rural areas with basic smartphones.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Real-time insights into usage patterns and health trends for administrators.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <h2 class="section-title">Live Demo</h2>
+            <p class="section-subtitle">Try the chatbot with sample health queries</p>
+
+            <div class="demo-container">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="chat-status">
+                            <div class="status-indicator" id="statusIndicator"></div>
+                            <span id="statusText">Connecting...</span>
+                        </div>
+                        <div class="language-selector">
+                            <select id="languageSelect">
+                                <option value="en">English</option>
+                                <option value="hi">हिंदी</option>
+                                <option value="or">ଓଡ଼ିଆ</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot-message">
+                            <div class="message-avatar">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="message-content">
+                                <span>Hello! I'm Ama Arogya, your health assistant. How can I help you today?</span>
+                                <div class="message-time">Just now</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input">
+                        <div class="quick-questions">
+                            <span class="quick-question" onclick="sendQuickMessage('I have a fever')">I have a
+                                fever</span>
+                            <span class="quick-question"
+                                onclick="sendQuickMessage('Tell me about vaccination')">Vaccination info</span>
+                            <span class="quick-question" onclick="sendQuickMessage('Pregnancy care tips')">Pregnancy
+                                tips</span>
+                        </div>
+                        <div class="input-container">
+                            <input type="text" id="messageInput" placeholder="Type your health question here..." />
+                            <button id="sendButton" onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-info">
+                    <h3>Sample Queries to Try:</h3>
+                    <div class="sample-queries">
+                        <div class="query-category">
+                            <h4>English</h4>
+                            <ul>
+                                <li>"I have a fever and headache"</li>
+                                <li>"Tell me about child vaccination"</li>
+                                <li>"What are the signs of malaria?"</li>
+                                <li>"Pregnancy care advice"</li>
+                            </ul>
+                        </div>
+                        <div class="query-category">
+                            <h4>हिंदी</h4>
+                            <ul>
+                                <li>"मुझे बुखार है"</li>
+                                <li>"गर्भावस्था में क्या सावधानी बरतें?"</li>
+                                <li>"बच्चों के टीकाकरण की जानकारी"</li>
+                            </ul>
+                        </div>
+                        <div class="query-category">
+                            <h4>ଓଡ଼ିଆ</h4>
+                            <ul>
+                                <li>"ମୋର ଜ୍ବର ଅଛି"</li>
+                                <li>"ଟୀକାକରଣ ବିଷୟରେ କୁହନ୍ତୁ"</li>
+                                <li>"ଗର୍ଭାବସ୍ଥା ଯତ୍ନ"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About the Project</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Bridging Healthcare Gaps in Rural Odisha</h3>
+                    <p>
+                        Ama Arogya is an AI-driven public health chatbot specifically designed for rural communities
+                        in Odisha. The project addresses critical healthcare accessibility challenges by providing
+                        24/7 health guidance in local languages through widely available platforms like WhatsApp.
+                    </p>
+                    <h4>Technical Architecture</h4>
+                    <ul>
+                        <li><strong>NLP Engine:</strong> Rasa Open Source for intent recognition and dialogue management
+                        </li>
+                        <li><strong>Backend:</strong> FastAPI with SQLAlchemy for robust data handling</li>
+                        <li><strong>Database:</strong> SQLite for local deployment and PostgreSQL for production</li>
+                        <li><strong>Messaging:</strong> Twilio WhatsApp API integration</li>
+                        <li><strong>Analytics:</strong> Real-time dashboard for usage monitoring</li>
+                    </ul>
+
+                    <h4>Project Status</h4>
+                    <div class="project-status">
+                        <div class="status-item completed">
+                            <i class="fas fa-check-circle"></i>
+                            <span>MVP Development Complete</span>
+                        </div>
+                        <div class="status-item completed">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Multilingual NLU Training</span>
+                        </div>
+                        <div class="status-item completed">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Health Content Database</span>
+                        </div>
+                        <div class="status-item in-progress">
+                            <i class="fas fa-clock"></i>
+                            <span>WhatsApp Integration Testing</span>
+                        </div>
+                        <div class="status-item pending">
+                            <i class="fas fa-circle"></i>
+                            <span>Field Deployment</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-stack">
+                    <h4>Technology Stack</h4>
+                    <div class="tech-icons">
+                        <div class="tech-item">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-robot"></i>
+                            <span>Rasa</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-server"></i>
+                            <span>FastAPI</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-database"></i>
+                            <span>SQLite</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Ama Arogya</h4>
+                    <p>Empowering rural Odisha with AI-driven healthcare accessibility.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <a href="https://github.com/SpicychieF05/Ama-Arogya_ChatBot" target="_blank">GitHub Repository</a>
+                    <a href="#demo">Live Demo</a>
+                    <a href="#features">Features</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>For inquiries and collaboration opportunities</p>
+                    <a href="mailto:connect.amaarogya@gmail.com">connect.amaarogya@gmail.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ama Arogya Project. Open Source under MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

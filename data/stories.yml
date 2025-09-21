@@ -1,0 +1,163 @@
+version: "3.1"
+
+stories:
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
+
+  - story: sad path 1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: affirm
+      - action: utter_happy
+
+  - story: sad path 2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_goodbye
+
+  - story: fever consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_fever
+      - action: utter_fever_advice
+      - intent: affirm
+      - action: utter_happy
+
+  - story: direct fever question
+    steps:
+      - intent: ask_fever
+      - action: utter_fever_advice
+
+  - story: headache consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_headache
+      - action: utter_headache_advice
+      - intent: affirm
+      - action: utter_happy
+
+  - story: direct headache question
+    steps:
+      - intent: ask_headache
+      - action: utter_headache_advice
+
+  - story: cough cold consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_cough_cold
+      - action: utter_cough_cold_advice
+
+  - story: direct cough cold question
+    steps:
+      - intent: ask_cough_cold
+      - action: utter_cough_cold_advice
+
+  - story: stomach pain consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_stomach_pain
+      - action: utter_stomach_pain_advice
+
+  - story: direct stomach pain question
+    steps:
+      - intent: ask_stomach_pain
+      - action: utter_stomach_pain_advice
+
+  - story: pregnancy care consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_pregnancy_care
+      - action: utter_pregnancy_care
+
+  - story: direct pregnancy question
+    steps:
+      - intent: ask_pregnancy_care
+      - action: utter_pregnancy_care
+
+  - story: vaccination consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_child_vaccination
+      - action: utter_vaccination_schedule
+
+  - story: direct vaccination question
+    steps:
+      - intent: ask_child_vaccination
+      - action: utter_vaccination_schedule
+
+  - story: diabetes consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_diabetes
+      - action: utter_diabetes_care
+
+  - story: direct diabetes question
+    steps:
+      - intent: ask_diabetes
+      - action: utter_diabetes_care
+
+  - story: blood pressure consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_blood_pressure
+      - action: utter_blood_pressure_advice
+
+  - story: direct blood pressure question
+    steps:
+      - intent: ask_blood_pressure
+      - action: utter_blood_pressure_advice
+
+  - story: first aid consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_first_aid
+      - action: utter_first_aid
+
+  - story: direct first aid question
+    steps:
+      - intent: ask_first_aid
+      - action: utter_first_aid
+
+  - story: general health consultation
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_general_health
+      - action: utter_general_health
+
+  - story: direct general health question
+    steps:
+      - intent: ask_general_health
+      - action: utter_general_health
+
+  - story: bot challenge conversation
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+  - story: goodbye conversation
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye

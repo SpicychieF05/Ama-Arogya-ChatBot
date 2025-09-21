@@ -1,0 +1,65 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Database files (if you want to keep them local)
+*.db
+*.sqlite
+*.sqlite3
+
+# Rasa models (can be large, regenerate with rasa train)
+models/
+
+# Logs
+*.log
+logs/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Rasa cache and artifacts
+.rasa/
+
+# Python tooling caches and coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage*
+coverage.xml
+
+# Packaging / build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Environment files (keep secrets local)
+.env
+.env.*
+
+# Frontend/node artifacts
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# Extra OS files (Windows)
+ehthumbs.db

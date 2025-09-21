@@ -1,0 +1,67 @@
+version: "3.1"
+
+rules:
+  - rule: Say goodbye anytime the user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Say 'I am a bot' anytime the user challenges
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+  - rule: Provide fever advice
+    steps:
+      - intent: ask_fever
+      - action: utter_fever_advice
+
+  - rule: Provide headache advice
+    steps:
+      - intent: ask_headache
+      - action: utter_headache_advice
+
+  - rule: Provide cough cold advice
+    steps:
+      - intent: ask_cough_cold
+      - action: utter_cough_cold_advice
+
+  - rule: Provide stomach pain advice
+    steps:
+      - intent: ask_stomach_pain
+      - action: utter_stomach_pain_advice
+
+  - rule: Provide pregnancy care advice
+    steps:
+      - intent: ask_pregnancy_care
+      - action: utter_pregnancy_care
+
+  - rule: Provide vaccination information
+    steps:
+      - intent: ask_child_vaccination
+      - action: utter_vaccination_schedule
+
+  - rule: Provide diabetes care advice
+    steps:
+      - intent: ask_diabetes
+      - action: utter_diabetes_care
+
+  - rule: Provide blood pressure advice
+    steps:
+      - intent: ask_blood_pressure
+      - action: utter_blood_pressure_advice
+
+  - rule: Provide first aid information
+    steps:
+      - intent: ask_first_aid
+      - action: utter_first_aid
+
+  - rule: Provide general health tips
+    steps:
+      - intent: ask_general_health
+      - action: utter_general_health
+
+  - rule: Fallback rule
+    steps:
+      - intent: nlu_fallback
+      - action: utter_default

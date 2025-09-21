@@ -1,0 +1,228 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hey
+      - hello
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - moin
+      - hey there
+      - let's go
+      - hey dude
+      - goodmorning
+      - goodevening
+      - good afternoon
+      - namaste
+      - namaskar
+
+  - intent: goodbye
+    examples: |
+      - cu
+      - good by
+      - cee you later
+      - good night
+      - bye
+      - goodbye
+      - have a nice day
+      - see you around
+      - bye bye
+      - see you later
+      - dhanyawad
+      - thank you
+
+  - intent: affirm
+    examples: |
+      - yes
+      - y
+      - indeed
+      - of course
+      - that sounds good
+      - correct
+      - haan
+      - ha
+
+  - intent: deny
+    examples: |
+      - no
+      - n
+      - never
+      - I don't think so
+      - don't like that
+      - no way
+      - not really
+      - nahi
+
+  - intent: ask_fever
+    examples: |
+      - I have a fever
+      - I'm feeling feverish
+      - My temperature is high
+      - I have high fever
+      - fever symptoms
+      - what to do for fever
+      - fever treatment
+      - moro jwor achi
+      - ମୋର ଜ୍ବର ଅଛି
+      - jwor laguchi
+      - body temperature badhi gala
+      - fever kam karne ke liye kya kare
+      - bukhar hai
+
+  - intent: ask_headache
+    examples: |
+      - I have a headache
+      - my head hurts
+      - headache problem
+      - severe headache
+      - migraine
+      - head pain
+      - sir me dard hai
+      - matharu batha laguchi
+      - ମାଥାରୁ ବଥା ଲାଗୁଛି
+      - matharu dukhuchi
+
+  - intent: ask_cough_cold
+    examples: |
+      - I have a cough
+      - cold and cough
+      - runny nose
+      - sore throat
+      - cough treatment
+      - what to do for cold
+      - khansi hai
+      - sardhi lagi
+      - gala dukhuchi
+      - khasi achi
+      - ଖାସି ଅଛି
+      - nakru pani baharuchi
+
+  - intent: ask_stomach_pain
+    examples: |
+      - stomach pain
+      - stomach ache
+      - abdominal pain
+      - digestive issues
+      - pet me dard
+      - pet kharab hai
+      - peta byatha
+      - ପେଟ ବ୍ୟଥା
+      - peta dukhuchi
+      - stomach upset
+
+  - intent: ask_pregnancy_care
+    examples: |
+      - pregnancy advice
+      - pregnant care tips
+      - what to eat during pregnancy
+      - pregnancy symptoms
+      - garbhavastha care
+      - pregnancy me kya kare
+      - garbha dharana samaye
+      - ଗର୍ଭାବସ୍ଥାରେ କଣ କରିବ
+      - pregnancy diet
+      - prenatal care
+
+  - intent: ask_child_vaccination
+    examples: |
+      - child vaccination
+      - vaccine schedule
+      - immunization
+      - vaccination for babies
+      - vaccine time table
+      - bachcho ka vaccination
+      - tikakaran
+      - ଟିକାକରଣ
+      - vaccine calendar
+      - when to give vaccines
+
+  - intent: ask_diabetes
+    examples: |
+      - diabetes symptoms
+      - blood sugar control
+      - diabetes diet
+      - madhumeh
+      - ମଧୁମେହ
+      - sugar ki bimari
+      - diabetes care
+      - high blood sugar
+      - diabetes treatment
+
+  - intent: ask_blood_pressure
+    examples: |
+      - high blood pressure
+      - low blood pressure
+      - BP problem
+      - blood pressure control
+      - rakta chapa
+      - ରକ୍ତ ଚାପ
+      - BP kam hai
+      - BP zyada hai
+      - hypertension
+
+  - intent: ask_first_aid
+    examples: |
+      - first aid
+      - emergency help
+      - what to do in emergency
+      - prathamik chikitsa
+      - ପ୍ରଥମିକ ଚିକିତ୍ସା
+      - emergency treatment
+      - first aid tips
+      - accident help
+
+  - intent: ask_general_health
+    examples: |
+      - health tips
+      - how to stay healthy
+      - general health advice
+      - swasthya tips
+      - ସ୍ବାସ୍ଥ୍ୟ ଟିପ୍ସ
+      - health care
+      - healthy lifestyle
+      - fitness tips
+
+  - intent: mood_great
+    examples: |
+      - perfect
+      - great
+      - amazing
+      - feeling like a king
+      - wonderful
+      - I am feeling very good
+      - I am great
+      - I am amazing
+      - I am going to save the world
+      - super stoked
+      - extremely good
+      - so so perfect
+      - so good
+      - so perfect
+
+  - intent: mood_unhappy
+    examples: |
+      - my day was horrible
+      - I am sad
+      - I don't feel very well
+      - I am disappointed
+      - super sad
+      - I'm so sad
+      - sad
+      - very sad
+      - unhappy
+      - not good
+      - not very good
+      - extremly sad
+      - so saad
+      - so sad
+
+  - intent: bot_challenge
+    examples: |
+      - are you a bot?
+      - are you a human?
+      - am I talking to a bot?
+      - am I talking to a human?
+      - what are you?

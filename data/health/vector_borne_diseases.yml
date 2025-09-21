@@ -1,0 +1,131 @@
+version: "3.1"
+
+nlu:
+  - intent: ask_malaria
+    examples: |
+      - I have fever with chills
+      - malaria symptoms
+      - mosquito bite fever
+      - ठंड लगकर बुखार आ रहा है
+      - मलेरिया के लक्षण क्या हैं
+      - मच्छर काटने से बुखार
+      - ମଲେରିଆ ଲକ୍ଷଣ କଣ
+      - ଥଣ୍ଡା ଲାଗି ଜ୍ବର ଆସୁଛି
+      - ମଶାକ କାମୁଡ଼ା ଜ୍ବର
+      - shivering and fever
+      - intermittent fever
+      - body ache with fever
+      - sweating after fever
+      - feeling cold and hot
+      - fever comes and goes
+      - बुखार आता जाता रहता है
+      - शरीर में दर्द और बुखार
+      - कंपकंपी के साथ बुखार
+      - पसीना आने के बाद ठंड
+      - ଜ୍ବର ଆସି ଯାଇଥାଏ
+      - ଶରୀର ଦୁଖ ଓ ଜ୍ବର
+      - ଗୁଇ ପରେ ଥଣ୍ଡା ଲାଗେ
+      - mosquito fever treatment
+      - how to prevent malaria
+      - malaria medicine
+
+  - intent: ask_dengue
+    examples: |
+      - severe headache with fever
+      - dengue symptoms
+      - body pain and high fever
+      - तेज़ बुखार और सिरदर्द
+      - डेंगू के लक्षण
+      - शरीर में बहुत दर्द
+      - ଡେଙ୍ଗୁ ଜ୍ବର ଲକ୍ଷଣ
+      - ତୀବ୍ର ମାଥା ବଥା
+      - ଶରୀର ଦୁଖ ଅଧିକ
+      - high fever not coming down
+      - muscle pain with fever
+      - eye pain and headache
+      - nausea and vomiting with fever
+      - skin rash with fever
+      - joint pain severe
+      - तेज़ बुखार उतर नहीं रहा
+      - मांसपेशियों में दर्द
+      - आंखों में दर्द सिरदर्द
+      - बुखार के साथ उल्टी
+      - ତୀବ୍ର ଜ୍ବର କମୁନାହିଁ
+      - ମାଂସପେଶୀ ଦୁଖ
+      - ଆଖି ଦୁଖ ଓ ମାଥା ବଥା
+      - blood in vomit
+      - bleeding gums
+      - dengue fever treatment
+      - platelet count low
+
+  - intent: ask_chikungunya
+    examples: |
+      - joint pain and fever
+      - swollen joints
+      - muscle pain with fever
+      - जोड़ों में तेज़ दर्द
+      - मांसपेशियों में दर्द
+      - बुखार के साथ जोड़ों में दर्द
+      - ଗଣ୍ଠି ବଥା ଓ ଜ୍ବର
+      - ମାଂସପେଶୀ ଦୁଖ
+      - ଜ୍ବର ସହ ଗଣ୍ଠି ଦୁଖ
+      - unable to move joints
+      - stiff joints morning
+      - knee pain with fever
+      - ankle swelling
+      - wrist pain severe
+      - fingers swollen
+      - जोड़ों में अकड़न
+      - घुटनों में दर्द बुखार
+      - टखनों में सूजन
+      - उंगलियों में दर्द
+      - ସକାଳେ ଗଣ୍ଠି ଅକଡ଼ା
+      - ଆଣ୍ଠୁ ଦୁଖ ଜ୍ବର
+      - ହାତ ଗୋଡ଼ ଫୁଲା
+      - chikungunya treatment
+      - joint pain relief
+      - how long joint pain lasts
+      - fever with rash
+
+  - intent: ask_vector_prevention
+    examples: |
+      - how to prevent mosquito diseases
+      - mosquito control methods
+      - मच्छरों से बचाव कैसे करें
+      - डेंगू मलेरिया से बचाव
+      - ମଶା ନିୟନ୍ତ୍ରଣ ଉପାୟ
+      - ମଶାଜନିତ ରୋଗରୁ ବଞ୍ଚିବା
+      - water storage mosquito
+      - mosquito net usage
+      - repellent cream
+      - clean water storage
+      - stagnant water removal
+      - पानी जमा न होने दें
+      - मच्छरदानी का उपयोग
+      - ମଶା ମାରିବା କ୍ରିମ
+      - ପାଣି ଜମା ହେବାକୁ ଦେବେ ନାହିଁ
+      - window nets
+      - room spray for mosquito
+      - plant mosquito repellent
+
+  - intent: ask_fever_emergency
+    examples: |
+      - very high fever not reducing
+      - fever with breathing difficulty
+      - unconscious with fever
+      - बहुत तेज़ बुखार नहीं उतर रहा
+      - सांस लेने में तकलीफ बुखार
+      - बेहोशी आ रही है
+      - ଅତ୍ୟଧିକ ଜ୍ବର କମୁନାହିଁ
+      - ଶ୍ୱାସ କଷ୍ଟ ଜ୍ବର
+      - ଚେତନା ହରାଉଛି
+      - convulsions with fever
+      - seizures high fever
+      - delirium fever
+      - bleeding with fever
+      - persistent vomiting fever
+      - unable to drink water
+      - ମୁଢ଼େଇ ସହ ଜ୍ବର
+      - ରକ୍ତସ୍ରାବ ଜ୍ବର
+      - when to go hospital fever
+      - emergency fever symptoms

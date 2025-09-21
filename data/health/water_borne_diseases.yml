@@ -1,0 +1,141 @@
+version: "3.1"
+
+nlu:
+  - intent: ask_diarrhea
+    examples: |
+      - loose motions
+      - watery stools
+      - diarrhea and dehydration
+      - दस्त हो रहा है
+      - पेट खराब है
+      - पानी जैसा मल आ रहा है
+      - ପେଟ ଖରାପ ହୋଇଛି
+      - ତରଳ ମଳ ହେଉଛି
+      - ଅତିସାର ହେଉଛି
+      - frequent loose stools
+      - stomach upset
+      - motions not stopping
+      - blood in stool
+      - mucus in stool
+      - cramping stomach pain
+      - बार बार दस्त आ रहा है
+      - पेट में मरोड़ उठ रहा है
+      - मल में खून आ रहा है
+      - कफ वाला दस्त
+      - ବାରମ୍ବାର ଅତିସାର
+      - ପେଟରେ ମରୋଡ଼
+      - ମଳରେ ରକ୍ତ
+      - ORS solution how to make
+      - dehydration symptoms
+      - when to see doctor diarrhea
+
+  - intent: ask_typhoid
+    examples: |
+      - prolonged fever
+      - typhoid symptoms
+      - stomach pain with fever
+      - लगातार बुखार आ रहा है
+      - टाइफाइड के लक्षण
+      - पेट दर्द के साथ बुखार
+      - ଟାଇଫଏଡ ଲକ୍ଷଣ
+      - ଲଗାତାର ଜ୍ବର
+      - ପେଟ ଦୁଖ ଜ୍ବର
+      - step ladder fever
+      - fever rising gradually
+      - weakness and headache
+      - loss of appetite
+      - rose colored spots
+      - constipation with fever
+      - धीरे धीरे बढ़ता बुखार
+      - भूख नहीं लग रही
+      - कमजोरी और सिरदर्द
+      - शरीर पर लाल दाने
+      - ଧୀରେ ଧୀରେ ବଢୁଥିବା ଜ୍ବର
+      - ଭୋକ ଲାଗୁନାହିଁ
+      - ଶରୀରରେ ଲାଲ ଦାଗ
+      - typhoid fever treatment
+      - how long typhoid lasts
+      - typhoid complications
+
+  - intent: ask_cholera
+    examples: |
+      - severe watery diarrhea
+      - rice water stools
+      - vomiting and diarrhea
+      - तेज़ दस्त और उल्टी
+      - चावल के पानी जैसा मल
+      - पानी की तरह दस्त
+      - ତୀବ୍ର ଅତିସାର ଓ ବାନ୍ତି
+      - ଚାଉଳ ପାଣି ପରି ମଳ
+      - ପାଣି ପରି ଅତିସାର
+      - profuse watery diarrhea
+      - leg cramps with diarrhea
+      - severe dehydration
+      - sunken eyes
+      - dry mouth extreme thirst
+      - no urine passing
+      - टांगों में ऐंठन दस्त
+      - आंखें धंसी हुई
+      - मुंह सूख रहा है
+      - पेशाब नहीं आ रहा
+      - ଗୋଡ଼ରେ ଖଲ୍ଲା ଅତିସାର
+      - ଆଖି ଭିତରକୁ ଯାଇଛି
+      - ପରିସ୍ରା ହେଉନାହିଁ
+      - cholera treatment
+      - ORS for cholera
+      - when emergency cholera
+
+  - intent: ask_hepatitis
+    examples: |
+      - yellowing of eyes
+      - jaundice symptoms
+      - dark yellow urine
+      - आंखें पीली पड़ गई हैं
+      - पीलिया के लक्षण
+      - पेशाब का रंग पीला
+      - ଆଖି ହଳଦିଆ ହୋଇଛି
+      - ପିତ୍ତଳ ରୋଗ ଲକ୍ଷଣ
+      - ପରିସ୍ରା ହଳଦିଆ ରଙ୍ଗର
+      - yellowish skin color
+      - pale colored stool
+      - fatigue and weakness
+      - loss of appetite
+      - nausea and vomiting
+      - abdominal pain right side
+      - चमड़ी का रंग पीला
+      - मल का रंग सफेद
+      - कमजोरी और थकान
+      - पेट के दाहिने तरफ दर्द
+      - ଚର୍ମ ହଳଦିଆ ରଙ୍ଗ
+      - ମଳ ଧଳା ରଙ୍ଗର
+      - ପେଟର ଡାହାଣ ପଟେ ଦୁଖ
+      - hepatitis A symptoms
+      - liver infection
+      - hepatitis prevention
+
+  - intent: ask_waterborne_prevention
+    examples: |
+      - how to prevent water diseases
+      - safe drinking water
+      - water purification methods
+      - पानी से होने वाली बीमारियों से बचाव
+      - पीने का पानी साफ कैसे करें
+      - पानी को शुद्ध कैसे करें
+      - ପାଣିଜନିତ ରୋଗରୁ ବଞ୍ଚିବା
+      - ପାଣି ଶୁଦ୍ଧ କରିବା ଉପାୟ
+      - ପିଇବା ପାଣି ସଫା କରିବା
+      - boil water before drinking
+      - water filtration
+      - chlorine tablets water
+      - hand washing soap
+      - food hygiene
+      - avoid street food
+      - पानी उबालकर पिएं
+      - हाथ धोना साबुन से
+      - खाना गर्म खाएं
+      - बाहर का खाना न खाएं
+      - ପାଣି ଫୁଟାଇ ପିଅନ୍ତୁ
+      - ସାବୁନରେ ହାତ ଧୋଇବା
+      - ଗରମ ଖାଦ୍ୟ ଖାଇବା
+      - water storage clean
+      - toilet hygiene
