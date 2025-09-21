@@ -20,15 +20,16 @@ rasa-sdk==3.6.2
 
 # Additional ML dependencies for Rasa
 tensorflow==2.13.1
-scikit-learn>=1.0.0
-spacy>=3.4.0
+scikit-learn==1.3.2
+spacy==3.7.2
 
 # Language support
-transformers>=4.21.0
+transformers==4.35.2
 
 # Development and Testing
 pytest>=7.0.0
 pytest-asyncio>=0.21.0
+pytest-cov>=4.0.0
 
 # Production deployment
 gunicorn>=20.1.0
