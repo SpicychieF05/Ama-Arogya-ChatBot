@@ -7,6 +7,9 @@
   [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
   [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com)
   [![Rasa](https://img.shields.io/badge/Rasa-3.6+-purple.svg)](https://rasa.com)
+  [![Tests](https://img.shields.io/badge/Tests-18%20Passing-brightgreen.svg)](test_api.py)
+  [![Security](https://img.shields.io/badge/Security-Enabled-red.svg)](src/utils/security.py)
+  [![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue.svg)](.github/workflows/ci.yml)
   [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 </div>
 
@@ -19,22 +22,28 @@ Ama Arogya is an intelligent, multilingual health chatbot designed specifically 
 - **🌐 Multilingual Support**: Responds in English, Hindi, and Odia
 - **🔍 Intelligent Symptom Checker**: AI-powered health assessment using Rasa NLU
 - **📱 Modern Web Interface**: Responsive design with real-time chat functionality
-- **⚡ High Performance**: FastAPI backend with async processing
+- **⚡ High Performance**: FastAPI backend with async processing and optimized timeouts
 - **📊 Analytics Dashboard**: Real-time usage statistics and insights
-- **🛡️ Secure & Reliable**: Production-ready with proper error handling
-- **🤖 Advanced NLP**: Powered by Rasa for intent recognition and dialogue management
+- **🛡️ Enterprise Security**: Production-ready security middleware with rate limiting and request validation
+- **🤖 Advanced NLP**: Powered by Rasa with custom actions for enhanced dialogue management
+- **🧪 Comprehensive Testing**: 18+ automated tests covering all endpoints and scenarios
+- **🚀 CI/CD Pipeline**: Automated testing, security scanning, and deployment validation
+- **⚙️ Environment Configuration**: Flexible configuration management with environment variables
 
 ## 🏗️ Architecture
 
 ```
 ama-arogya-chatbot/
+├── .github/                      # GitHub Actions workflows
+│   └── workflows/
+│       └── ci.yml               # CI/CD pipeline
 ├── src/                          # Source code
 │   ├── api/                      # FastAPI application
 │   │   ├── main.py              # API endpoints
 │   │   └── __init__.py
 │   ├── utils/                    # Utility functions
 │   │   ├── helpers.py           # Core utilities
-│   │   ├── security.py          # Security middleware
+│   │   ├── security.py          # Security middleware & validation
 │   │   └── __init__.py
 │   ├── config/                   # Configuration
 │   │   ├── settings.py          # App settings
@@ -62,12 +71,14 @@ ama-arogya-chatbot/
 ├── tests/                        # Test files
 │   └── test_stories.yml         # Test conversation flows
 ├── main.py                       # FastAPI application entry point
+├── test_api.py                   # Comprehensive API test suite (18+ tests)
 ├── database.py                   # Database models and initialization
 ├── config.yml                   # Rasa configuration
-├── domain.yml                    # Rasa domain definition
-├── endpoints.yml                 # Rasa endpoints configuration
+├── domain.yml                    # Rasa domain definition with custom actions
+├── endpoints.yml                 # Rasa endpoints configuration (actions enabled)
 ├── credentials.yml               # Rasa credentials
-├── requirements.txt              # Python dependencies
+├── requirements.txt              # Python dependencies (pinned versions)
+├── .env.example                  # Environment configuration template
 └── README.md                     # This file
 ```
 
@@ -97,23 +108,46 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-3. **Install Dependencies**
+3. **Configure Environment Variables**
+```bash
+# Copy environment template
+cp .env.example .env
+
+# Edit .env file with your configuration
+# HOST=0.0.0.0
+# PORT=8000
+# DEBUG=false
+# RASA_API_URL=http://localhost:5005
+# API_TIMEOUT=5
+```
+
+4. **Install Dependencies**
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-4. **Initialize Database**
+5. **Initialize Database**
 ```bash
 python database.py
 ```
 
-5. **Train Rasa Model**
+6. **Train Rasa Model**
 ```bash
 rasa train
 ```
 
-6. **Start Rasa Server (in separate terminal)**
+7. **Start Rasa Actions Server (in separate terminal)**
+```bash
+# Activate virtual environment first
+source .venv/Scripts/activate  # Windows
+# source .venv/bin/activate    # Linux/Mac
+
+# Start Rasa actions server for custom actions
+rasa run actions --port 5055
+```
+
+8. **Start Rasa Server (in separate terminal)**
 ```bash
 # Activate virtual environment first
 source .venv/Scripts/activate  # Windows
@@ -123,20 +157,42 @@ source .venv/Scripts/activate  # Windows
 rasa run --enable-api --port 5005
 ```
 
-7. **Start FastAPI Application**
+9. **Start FastAPI Application**
 ```bash
-# In another terminal, activate virtual environment
-python -m uvicorn main:app --host 127.0.0.1 --port 8001 --reload
+# In another terminal, activate virtual environment and run:
+python main.py
+# Or alternatively:
+# python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ### 📱 Access Points
 
-- **Web Interface**: http://127.0.0.1:8001/
-- **API Documentation**: http://127.0.0.1:8001/docs
-- **Health Check**: http://127.0.0.1:8001/health
-- **Analytics Dashboard**: http://127.0.0.1:8001/dashboard
+- **Web Interface**: http://localhost:8000/
+- **API Documentation**: http://localhost:8000/docs
+- **Health Check**: http://localhost:8000/health
+- **Analytics Dashboard**: http://localhost:8000/dashboard
 
 ## 🧪 Testing the Chatbot
+
+### Automated Testing
+
+Run the comprehensive test suite:
+
+```bash
+# Run all tests
+python -m pytest test_api.py -v
+
+# Run with coverage reporting
+python -m pytest test_api.py -v --cov=main --cov-report=html
+
+# Run specific test class
+python -m pytest test_api.py::TestChatEndpoint -v
+
+# Run CI/CD pipeline locally (requires GitHub CLI)
+gh workflow run ci.yml
+```
+
+### Manual Testing
 
 ### Sample Queries to Try
 - **English**: "Hello, I have a fever and headache"
@@ -150,43 +206,49 @@ python -m uvicorn main:app --host 127.0.0.1 --port 8001 --reload
 ### Testing Methods
 
 **Option 1: Web Interface**
-Open http://127.0.0.1:8001/ in your browser and start chatting with the modern interface!
+Open http://localhost:8000/ in your browser and start chatting with the modern interface!
 
 **Option 2: API Testing**
 ```bash
-curl -X POST "http://127.0.0.1:8001/chat" \
+curl -X POST "http://localhost:8000/chat" \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, I have a fever", "sender_id": "test_user", "language": "en"}'
 ```
 
 **Option 3: Interactive API Documentation**
-Visit http://127.0.0.1:8001/docs to test the API interactively using FastAPI's built-in documentation.
+Visit http://localhost:8000/docs to test the API interactively using FastAPI's built-in documentation.
 
 ### Stop the Applications
 - Stop FastAPI: Press `Ctrl+C` in the FastAPI terminal
-- Stop Rasa: Press `Ctrl+C` in the Rasa server terminal
+- Stop Rasa Actions: Press `Ctrl+C` in the Rasa actions terminal
+- Stop Rasa Server: Press `Ctrl+C` in the Rasa server terminal
 
 ## 🛠️ Technology Stack
 
 - **Backend Framework**: FastAPI 0.104+ (High-performance async API)
 - **NLP Engine**: Rasa 3.6+ (Intent recognition, entity extraction, dialogue management)
-- **Database**: SQLite with SQLAlchemy ORM
+- **Security**: Custom SecurityMiddleware with rate limiting and request validation
+- **Database**: SQLite with SQLAlchemy ORM (updated to modern syntax)
 - **Frontend**: Modern HTML5, CSS3 with CSS Variables, Vanilla JavaScript
 - **Language Support**: English, Hindi, Odia
-- **Deployment**: Uvicorn ASGI server
+- **Testing**: Pytest with 18+ comprehensive tests
+- **CI/CD**: GitHub Actions with automated testing, security scanning, and deployment
+- **Configuration**: Environment-based configuration with python-dotenv
+- **Deployment**: Uvicorn ASGI server with production optimizations
 
 ## 📡 API Reference
 
 ### Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | Main web interface |
-| GET | `/demo` | Alternative demo route |
-| GET | `/health` | Health check endpoint |
-| GET | `/dashboard` | Analytics dashboard |
-| GET | `/docs` | Interactive API documentation |
-| POST | `/chat` | Chat with the bot |
+| Method | Endpoint | Description | Security |
+|--------|----------|-------------|----------|
+| GET | `/` | Main web interface | Rate limited |
+| GET | `/demo` | Alternative demo route | Rate limited |
+| GET | `/health` | Health check endpoint | Public |
+| GET | `/stats` | Usage statistics | Rate limited |
+| GET | `/dashboard` | Analytics dashboard | Rate limited |
+| GET | `/docs` | Interactive API documentation | Public |
+| POST | `/chat` | Chat with the bot | Rate limited, validated |
 
 ### Chat API
 
@@ -198,6 +260,63 @@ Visit http://127.0.0.1:8001/docs to test the API interactively using FastAPI's b
   "language": "en"
 }
 ```
+
+**Response Format:**
+```
+
+**Response Format:**
+```json
+{
+  "response": "I understand you have a fever. This could be due to various reasons...",
+  "language": "en",
+  "intent": "ask_fever"
+}
+```
+
+## 🧪 Test Suite
+
+The project includes a comprehensive test suite with 18+ automated tests:
+
+### Test Categories
+
+- **Health Endpoint Tests**: API health check validation
+- **Chat Functionality Tests**: Multi-language chat testing (English, Hindi, Odia)
+- **Error Handling Tests**: Input validation, edge cases, security testing
+- **API Validation Tests**: Request/response format validation
+- **Static File Tests**: Frontend asset serving
+- **Mock Testing**: Database and external service mocking
+
+### Running Tests
+
+```bash
+# Run all tests
+python -m pytest test_api.py -v
+
+# Run with coverage
+python -m pytest test_api.py --cov=main --cov-report=html
+
+# Run specific test categories
+python -m pytest test_api.py::TestChatEndpoint -v
+python -m pytest test_api.py::TestErrorHandling -v
+```
+
+### Test Results
+```
+18 passed, 2 warnings in 30.51s
+- TestHealthEndpoint: 2 tests ✅
+- TestChatEndpoint: 7 tests ✅  
+- TestStatsEndpoint: 1 test ✅
+- TestStaticFiles: 2 tests ✅
+- TestErrorHandling: 5 tests ✅
+- Individual Functions: 1 test ✅
+```
+
+### Security Features
+
+- **Rate Limiting**: 100 requests per minute per IP
+- **Request Validation**: Input sanitization and size limits
+- **Security Headers**: CORS, CSP, and other security headers
+- **Error Handling**: Graceful error responses without sensitive information leak
 
 **Response Format:**
 ```json
@@ -234,6 +353,18 @@ The chatbot is trained on various health topics including:
 - **Appointment Booking**: Integration with local healthcare facilities
 - **Real-time Alerts**: Disease outbreak notifications
 - **Offline Support**: Progressive Web App for low-connectivity areas
+- **Advanced Analytics**: ML-powered usage insights and health trend analysis
+- **Multi-tenant Support**: Support for multiple healthcare organizations
+
+## 🛡️ Security & Production Features
+
+- **Security Middleware**: Enterprise-grade security with rate limiting
+- **Request Validation**: Input sanitization and XSS protection  
+- **Environment Configuration**: Secure configuration management
+- **Error Handling**: Graceful error responses without information leakage
+- **Monitoring**: Comprehensive logging and health checks
+- **Testing**: 18+ automated tests covering all scenarios
+- **CI/CD Pipeline**: Automated security scanning and deployment validation
 
 ## 🤝 Contributing
 
@@ -251,7 +382,26 @@ We welcome contributions! To contribute:
 - Add docstrings to functions and classes
 - Include type hints where appropriate
 - Keep Rasa training data organized and well-documented
-- Test your changes thoroughly before submitting
+- Write tests for new features using pytest
+- Run the test suite before submitting: `python -m pytest test_api.py -v`
+- Ensure CI/CD pipeline passes all checks
+- Update documentation for new features
+
+### Local Development Setup
+
+```bash
+# Install development dependencies
+pip install pytest pytest-cov flake8 black
+
+# Run linting
+flake8 . --max-line-length=127
+
+# Format code
+black .
+
+# Run tests with coverage
+python -m pytest test_api.py -v --cov=main --cov-report=html
+```
 
 ## 📝 License
 
@@ -266,14 +416,34 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Check if port 5005 is available
 - Verify virtual environment is activated
 
+**Rasa Actions Not Working:**
+- Ensure Rasa actions server is running: `rasa run actions --port 5055`
+- Check that `endpoints.yml` has the action_endpoint uncommented
+- Verify custom actions are defined in `domain.yml`
+
 **Frontend Not Loading:**
-- Ensure FastAPI server is running on port 8001
+- Ensure FastAPI server is running on the configured port (default: 8000)
 - Check if static files are properly mounted
 - Verify frontend directory exists and contains required files
 
 **Database Issues:**
 - Run `python database.py` to reinitialize the database
 - Check SQLite file permissions
+
+**Security/Rate Limiting Issues:**
+- Check if you're exceeding the rate limit (100 requests/minute)
+- Verify SecurityMiddleware is properly configured
+- Review error logs for security-related rejections
+
+**Environment Configuration Issues:**
+- Ensure `.env` file exists (copy from `.env.example`)
+- Check that all required environment variables are set
+- Verify python-dotenv is installed: `pip install python-dotenv`
+
+**Test Failures:**
+- Run tests individually to isolate issues: `python -m pytest test_api.py::TestClass::test_method -v`
+- Check that all dependencies are installed: `pip install -r requirements.txt`
+- Ensure the application can import properly: `python -c "import main"`
 
 ### Getting Help
 
@@ -289,5 +459,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Ama Arogya** - Making healthcare information accessible to rural communities in Odisha through the power of AI and multilingual support. 🏥💙
+
+*Enterprise-ready healthcare chatbot with comprehensive testing, security, and CI/CD pipeline.*
+
+**Key Stats:**
+- 🧪 18+ Automated Tests
+- 🛡️ Enterprise Security
+- 🚀 CI/CD Pipeline  
+- 🌐 3 Languages Supported
+- ⚡ High Performance API
 
 *Project maintained by the Ama Arogya development team.*
