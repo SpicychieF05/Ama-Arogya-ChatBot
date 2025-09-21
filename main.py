@@ -9,8 +9,27 @@ from typing import Optional
 import os
 import requests
 import json
+from src.utils.security import SecurityMiddleware
+from dotenv import load_dotenv
 
-app = FastAPI(title="Ama Arogya - Public Health Chatbot API", version="1.0.0")
+# Load environment variables
+load_dotenv()
+
+# Configuration from environment variables
+HOST = os.getenv("HOST", "0.0.0.0")
+PORT = int(os.getenv("PORT", "8000"))
+DEBUG = os.getenv("DEBUG", "false").lower() == "true"
+RASA_API_URL = os.getenv("RASA_API_URL", "http://localhost:5005")
+API_TIMEOUT = int(os.getenv("API_TIMEOUT", "5"))
+
+app = FastAPI(
+    title="Ama Arogya - Public Health Chatbot API",
+    version="1.0.0",
+    debug=DEBUG
+)
+
+# Add security middleware
+app.add_middleware(SecurityMiddleware)
 
 # Mount static files for frontend (serve from ./static)
 base_dir = os.path.dirname(__file__)
@@ -19,7 +38,7 @@ if os.path.exists(static_path):
     app.mount("/static", StaticFiles(directory=static_path), name="static")
 
 # Rasa server configuration
-RASA_API_URL = "http://localhost:5005"
+RASA_API_URL = os.getenv("RASA_API_URL", "http://localhost:5005")
 
 
 class ChatRequest(BaseModel):
@@ -67,7 +86,7 @@ async def get_rasa_response(message: str, sender_id: str):
         response = requests.post(
             f"{RASA_API_URL}/webhooks/rest/webhook",
             json=rasa_payload,
-            timeout=10
+            timeout=API_TIMEOUT
         )
 
         if response.status_code == 200:
@@ -213,3 +232,21 @@ async def get_demo():
             return f.read()
     else:
         return HTMLResponse("Demo frontend not found. Please ensure 'index.html' exists at project root and assets in the 'static' directory.", status_code=404)
+
+
+# Application startup
+if __name__ == "__main__":
+    import uvicorn
+    print(f"Starting Ama Arogya ChatBot API...")
+    print(f"Host: {HOST}")
+    print(f"Port: {PORT}")
+    print(f"Debug: {DEBUG}")
+    print(f"Rasa API URL: {RASA_API_URL}")
+
+    uvicorn.run(
+        "main:app",
+        host=HOST,
+        port=PORT,
+        reload=DEBUG,
+        log_level="debug" if DEBUG else "info"
+    )
