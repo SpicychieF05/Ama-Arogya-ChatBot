@@ -32,9 +32,6 @@ ama-arogya-chatbot/
 │   ├── api/                      # FastAPI application
 │   │   ├── main.py              # API endpoints
 │   │   └── __init__.py
-│   ├── models/                   # Database models
-│   │   ├── database.py          # SQLAlchemy models
-│   │   └── __init__.py
 │   ├── utils/                    # Utility functions
 │   │   ├── helpers.py           # Core utilities
 │   │   ├── security.py          # Security middleware
@@ -43,10 +40,10 @@ ama-arogya-chatbot/
 │   │   ├── settings.py          # App settings
 │   │   └── __init__.py
 │   └── __init__.py
-├── frontend/                     # Modern web interface
-│   ├── index.html               # Main frontend page
+├── static/                       # Frontend assets
 │   ├── styles.css               # Modern CSS with CSS variables
 │   └── script.js                # Interactive JavaScript
+├── index.html                    # Main web interface
 ├── data/                         # Rasa training data
 │   ├── nlu.yml                  # Natural Language Understanding
 │   ├── stories.yml              # Conversation flows
@@ -57,11 +54,13 @@ ama-arogya-chatbot/
 ├── actions/                      # Rasa custom actions
 │   ├── __init__.py
 │   └── actions.py               # Custom action implementations
-├── models/                       # Trained Rasa models
+├── docs/                         # Documentation
+│   └── API.md                   # API documentation
 ├── scripts/                      # Setup and deployment scripts
 │   ├── dev-setup.sh             # Linux/Mac setup
 │   └── dev-setup.bat            # Windows setup
 ├── tests/                        # Test files
+│   └── test_stories.yml         # Test conversation flows
 ├── main.py                       # FastAPI application entry point
 ├── database.py                   # Database models and initialization
 ├── config.yml                   # Rasa configuration
@@ -69,7 +68,6 @@ ama-arogya-chatbot/
 ├── endpoints.yml                 # Rasa endpoints configuration
 ├── credentials.yml               # Rasa credentials
 ├── requirements.txt              # Python dependencies
-├── .env.example                  # Environment template
 └── README.md                     # This file
 ```
 
