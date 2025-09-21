@@ -123,6 +123,7 @@ actions:
   - utter_goodbye
   - utter_iamabot
   - utter_default
+  - action_health_advice
 
 session_config:
   session_expiration_time: 60
