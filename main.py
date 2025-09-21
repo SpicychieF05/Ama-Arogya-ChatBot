@@ -12,13 +12,11 @@ import json
 
 app = FastAPI(title="Ama Arogya - Public Health Chatbot API", version="1.0.0")
 
-# Mount static files for frontend
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
-
-# Mount static files for frontend
-frontend_path = os.path.join(os.path.dirname(__file__), "frontend")
-if os.path.exists(frontend_path):
-    app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+# Mount static files for frontend (serve from ./static)
+base_dir = os.path.dirname(__file__)
+static_path = os.path.join(base_dir, "static")
+if os.path.exists(static_path):
+    app.mount("/static", StaticFiles(directory=static_path), name="static")
 
 # Rasa server configuration
 RASA_API_URL = "http://localhost:5005"
@@ -209,10 +207,9 @@ async def get_demo():
     """
     Serve the demo frontend interface
     """
-    frontend_file = os.path.join(os.path.dirname(
-        __file__), "frontend", "index.html")
-    if os.path.exists(frontend_file):
-        with open(frontend_file, "r", encoding="utf-8") as f:
+    index_file = os.path.join(os.path.dirname(__file__), "index.html")
+    if os.path.exists(index_file):
+        with open(index_file, "r", encoding="utf-8") as f:
             return f.read()
     else:
-        return HTMLResponse("Demo frontend not found. Please ensure frontend files are in the 'frontend' directory.", status_code=404)
+        return HTMLResponse("Demo frontend not found. Please ensure 'index.html' exists at project root and assets in the 'static' directory.", status_code=404)
