@@ -470,5 +470,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - ⚡ High Performance API
 
 *Project maintained and developed by the Arogya Allies team.*
-*Team ID - comming*
+---
+*Team ID - coming*
+---
 *Smart India Hackathon 2025*
