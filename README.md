@@ -453,8 +453,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- **Project Repository**: [GitHub](https://github.com/SpicychieF05/Ama-Arogya_ChatBot)
-- **Issues**: [GitHub Issues](https://github.com/SpicychieF05/Ama-Arogya_ChatBot/issues)
+- **Project Repository**: [GitHub](https://github.com/SpicychieF05/Ama-Arogya-ChatBot)
+- **Issues**: [GitHub Issues](https://github.com/SpicychieF05/Ama-Arogya-ChatBot/issues)
 
 ---
 
@@ -469,4 +469,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 🌐 3 Languages Supported
 - ⚡ High Performance API
 
-*Project maintained by the Ama Arogya development team.*
+*Project maintained and developed by the Arogya Allies team.*
+*Team ID - comming*
+*Smart India Hackathon 2025*
