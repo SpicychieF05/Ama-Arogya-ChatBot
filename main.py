@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 try:
     from pydantic import BaseModel  # v1/v2 compatible
@@ -235,6 +236,14 @@ async def get_demo():
             return f.read()
     else:
         return HTMLResponse("Demo frontend not found. Please ensure 'index.html' exists at project root and assets in the 'static' directory.", status_code=404)
+
+
+@app.get('/favicon.ico')
+async def favicon():
+    """Redirect /favicon.ico requests to the hosted Cloudinary favicon to avoid 404s."""
+    return RedirectResponse(
+        "https://res.cloudinary.com/dlxybta5a/image/upload/v1758637788/Gemini_Generated_Image_bemujzbemujzbemu-photoaidcom-cropped_bsfbvm.png"
+    )
 
 
 # Application startup
