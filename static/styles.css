@@ -48,8 +48,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
-    /* minimal padding for tighter spacing */
+    /* Make header content span full width and sit closer to edges */
+    max-width: none;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    /* slightly reduced horizontal padding for edge proximity */
 }
 
 .logo {
@@ -1011,8 +1014,8 @@ body {
     }
 
     .header .container {
-        padding: 0.5rem 1.5rem;
-        /* minimal padding even on large screens */
+        padding: 0.5rem 0.75rem;
+        /* tighter header edges on large screens */
     }
 
     .demo-container {
@@ -1056,8 +1059,8 @@ body {
     }
 
     .header .container {
-        padding: 0.5rem 1rem;
-        /* tight spacing for tablets */
+        padding: 0.5rem 0.75rem;
+        /* tighter spacing for tablets */
     }
 
     .hero-content {
