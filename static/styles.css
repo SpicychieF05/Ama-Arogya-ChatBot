@@ -28,7 +28,7 @@ body {
     margin: 0 auto;
     /* center content */
     padding: 0 1rem;
-    /* spacing on small screens */
+    /* reduced spacing for tighter layout */
 }
 
 /* Header */
@@ -48,22 +48,26 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
+    /* minimal padding for tighter spacing */
 }
 
 .logo {
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
-    /* using rem */
+    font-size: 1.25rem;
+    /* slightly reduced to match smaller logo image */
     font-weight: 700;
     color: #2563eb;
 }
 
 .logo-img {
     width: 40px;
-    height: 40px;
+    height: 28px;
+    /* rectangular aspect ratio for logo */
     margin-right: 0.5rem;
+    object-fit: contain;
+    /* ensure proper scaling */
 }
 
 .nav {
@@ -564,6 +568,8 @@ body {
     grid-template-columns: 1fr;
     gap: 3rem;
     margin-top: 3rem;
+    padding: 0 1rem;
+    /* additional inner padding for better spacing */
 }
 
 .chat-container {
@@ -576,6 +582,8 @@ body {
     flex-direction: column;
     max-width: 800px;
     margin: 0 auto;
+    width: 100%;
+    /* ensure full width within constraints */
 }
 
 .chat-header {
@@ -997,9 +1005,21 @@ body {
 
 /* Large Desktop Screens (1200px and up) */
 @media (min-width: 1200px) {
+    .container {
+        padding: 0 1.5rem;
+        /* moderate padding on large screens */
+    }
+
+    .header .container {
+        padding: 0.5rem 1.5rem;
+        /* minimal padding even on large screens */
+    }
+
     .demo-container {
         grid-template-columns: 2fr 1fr;
         gap: 4rem;
+        padding: 0 2rem;
+        /* extra padding for large screens */
     }
 
     .about-content {
@@ -1025,6 +1045,21 @@ body {
 
 /* Tablet Screens (768px to 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        padding: 0 1.25rem;
+        /* balanced padding for tablets */
+    }
+
+    .demo-container {
+        padding: 0 1rem;
+        /* comfortable spacing for tablets */
+    }
+
+    .header .container {
+        padding: 0.5rem 1rem;
+        /* tight spacing for tablets */
+    }
+
     .hero-content {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -1042,6 +1077,20 @@ body {
     .features-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
+    }
+
+    .demo-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .demo-container {
@@ -1226,7 +1275,8 @@ body {
     }
 
     .header .container {
-        padding: var(--space-2) var(--gutter);
+        padding: 0.5rem 0.75rem;
+        /* very tight spacing on mobile */
     }
 
     .logo {
@@ -1659,7 +1709,18 @@ body {
     }
 
     .container {
-        padding: 0 0.75rem;
+        padding: 0 1rem;
+        /* maintain consistent spacing even on small screens */
+    }
+
+    .demo-container {
+        padding: 0 0.5rem;
+        /* slightly reduced inner padding on very small screens */
+    }
+
+    .header .container {
+        padding: 0.25rem 0.75rem;
+        /* extremely compact header on very small screens */
     }
 
     .hero {
