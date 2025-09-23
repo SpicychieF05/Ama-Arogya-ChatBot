@@ -1,5 +1,7 @@
 // Configuration
-const API_BASE_URL = 'http://localhost:8001';
+// Prefer same-origin API by default. If you need to point elsewhere, define `window.API_BASE_URL` before loading this script.
+const API_BASE_URL = (window.API_BASE_URL || '').replace(/\/$/, '');
+const apiUrl = (path) => (API_BASE_URL ? `${API_BASE_URL}${path}` : path);
 let chatHistory = [];
 let isConnected = false;
 
@@ -84,18 +86,21 @@ function setupEventListeners() {
 // Check if the backend server is running
 async function checkServerStatus() {
     try {
-        const response = await fetch(`${API_BASE_URL}/docs`);
+        const response = await fetch(apiUrl('/health'));
         if (response.ok) {
+            // If /health exists but returns custom JSON, that's fine
+            // We only care that the backend responded successfully.
             updateConnectionStatus(true);
-        } else {
-            updateConnectionStatus(false);
+            return;
         }
     } catch (error) {
-        updateConnectionStatus(false);
+        // no-op; handled below
     }
+    updateConnectionStatus(false);
 }
 
 // Update connection status
+let offlineNotified = false;
 function updateConnectionStatus(connected) {
     isConnected = connected;
     
@@ -104,12 +109,16 @@ function updateConnectionStatus(connected) {
         statusText.textContent = 'Connected';
         sendButton.disabled = false;
         messageInput.disabled = false;
+        offlineNotified = false;
     } else {
         statusIndicator.className = 'status-indicator connecting';
         statusText.textContent = 'Demo Mode (Server Offline)';
         sendButton.disabled = false;
         messageInput.disabled = false;
-        addSystemMessage('Note: Backend server is offline. Demo responses will be simulated.');
+        if (!offlineNotified) {
+            addSystemMessage('Note: Backend server is offline. Demo responses will be simulated.');
+            offlineNotified = true;
+        }
     }
 }
 
@@ -144,7 +153,7 @@ async function sendMessage() {
         
         if (isConnected) {
             // Try to send to real API
-            const apiResponse = await fetch(`${API_BASE_URL}/chat`, {
+            const apiResponse = await fetch(apiUrl('/chat'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
