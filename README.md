@@ -5,9 +5,9 @@
   <p>Bridging the health information gap in Odisha with AI-powered assistance</p>
   
   [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
-  [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com)
+  [![FastAPI](https://img.shields.io/badge/FastAPI-0.95.2-green.svg)](https://fastapi.tiangolo.com)
   [![Rasa](https://img.shields.io/badge/Rasa-3.6+-purple.svg)](https://rasa.com)
-  [![Tests](https://img.shields.io/badge/Tests-18%20Passing-brightgreen.svg)](test_api.py)
+  [![Tests](https://img.shields.io/badge/Tests-Pytest-brightgreen.svg)](test_api.py)
   [![Security](https://img.shields.io/badge/Security-Enabled-red.svg)](src/utils/security.py)
   [![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue.svg)](.github/workflows/ci.yml)
   [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -103,7 +103,7 @@ python -m venv .venv
 
 # Activate virtual environment
 # Windows:
-.venv\Scripts\activate
+. .venv/Scripts/activate
 # Linux/Mac:
 source .venv/bin/activate
 ```
@@ -132,26 +132,26 @@ pip install -r requirements.txt
 python database.py
 ```
 
-6. **Train Rasa Model**
+6. (Optional) **Train Rasa Model**
 ```bash
 rasa train
 ```
 
-7. **Start Rasa Actions Server (in separate terminal)**
+7. (Optional) **Start Rasa Actions Server** (separate terminal)
 ```bash
 # Activate virtual environment first
-source .venv/Scripts/activate  # Windows
-# source .venv/bin/activate    # Linux/Mac
+. .venv/Scripts/activate  # Windows bash
+# source .venv/bin/activate  # Linux/Mac
 
 # Start Rasa actions server for custom actions
 rasa run actions --port 5055
 ```
 
-8. **Start Rasa Server (in separate terminal)**
+8. (Optional) **Start Rasa Server** (separate terminal)
 ```bash
 # Activate virtual environment first
-source .venv/Scripts/activate  # Windows
-# source .venv/bin/activate    # Linux/Mac
+. .venv/Scripts/activate  # Windows bash
+# source .venv/bin/activate  # Linux/Mac
 
 # Start Rasa server
 rasa run --enable-api --port 5005
@@ -164,6 +164,10 @@ python main.py
 # Or alternatively:
 # python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+10. (VS Code) **Run with Tasks**
+- Open the Command Palette → "Run Task" → choose `Run FastAPI dev server`
+- Quick checks: `Run API quick test` or `API sanity run` tasks
 
 ### 📱 Access Points
 
@@ -223,6 +227,23 @@ Visit http://localhost:8000/docs to test the API interactively using FastAPI's b
 - Stop Rasa Actions: Press `Ctrl+C` in the Rasa actions terminal
 - Stop Rasa Server: Press `Ctrl+C` in the Rasa server terminal
 
+### Model Evaluation
+
+You can run the built-in evaluation script against the running API (port 8000):
+
+```bash
+python evaluate_model.py
+```
+
+This will print overall accuracy, per-language accuracy, and per-topic performance based on predefined test cases.
+
+### VS Code Tasks
+
+The workspace includes tasks for convenience:
+- `Run FastAPI dev server`: starts the app on `127.0.0.1:8000`
+- `Run API quick test`: spins up a temporary server and performs a health + chat call
+- `API sanity run`: similar to quick test with minimal output
+
 ## 🛠️ Technology Stack
 
 - **Backend Framework**: FastAPI 0.104+ (High-performance async API)
@@ -247,8 +268,9 @@ Visit http://localhost:8000/docs to test the API interactively using FastAPI's b
 | GET | `/health` | Health check endpoint | Public |
 | GET | `/stats` | Usage statistics | Rate limited |
 | GET | `/dashboard` | Analytics dashboard | Rate limited |
-| GET | `/docs` | Interactive API documentation | Public |
+| GET | `/docs` | Interactive API documentation | Public (dev) |
 | POST | `/chat` | Chat with the bot | Rate limited, validated |
+| POST | `/api/chat` | Chat (alias in `src/api/main.py`) | Rate limited, validated |
 
 ### Chat API
 
@@ -262,14 +284,11 @@ Visit http://localhost:8000/docs to test the API interactively using FastAPI's b
 ```
 
 **Response Format:**
-```
-
-**Response Format:**
 ```json
 {
   "response": "I understand you have a fever. This could be due to various reasons...",
   "language": "en",
-  "intent": "ask_fever"
+  "intent": "rasa_processed" | "fallback"
 }
 ```
 
@@ -323,10 +342,25 @@ python -m pytest test_api.py::TestErrorHandling -v
 {
   "response": "I understand you have a fever. This could be due to various reasons...",
   "language": "en",
-  "intent": "ask_fever",
-  "confidence": 0.95
+  "intent": "rasa_processed" | "fallback"
 }
 ```
+
+## 🧰 Troubleshooting
+
+- Web shows demo mode or offline banner
+  - Ensure API is up: `curl http://127.0.0.1:8000/health`
+  - Frontend uses same-origin relative URLs; make sure you opened the site from port `8000`
+- Rasa not responding
+  - Start Rasa servers (optional features):
+    - `rasa run --enable-api --port 5005`
+    - `rasa run actions --port 5055`
+  - The app will gracefully fall back to built-in responses when Rasa is unavailable
+- Dependency conflicts
+  - We pin `fastapi==0.95.2`, `pydantic==1.10.9`, `scikit-learn==1.1.3`, `spacy==3.5.4` for Rasa 3.6 compatibility
+  - Avoid forcing a TensorFlow version; let Rasa manage it
+- Windows activation
+  - Use `. .venv/Scripts/activate` when using bash on Windows (Git Bash/WSL)
 
 ## 🏥 Health Knowledge Base
 
