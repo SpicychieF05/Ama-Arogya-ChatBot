@@ -10,7 +10,7 @@ from typing import List, Dict, Tuple
 
 
 class ChatBotEvaluator:
-    def __init__(self, base_url: str = "http://127.0.0.1:8001"):
+    def __init__(self, base_url: str = "http://127.0.0.1:8000"):
         self.base_url = base_url
         self.test_cases = self.get_test_cases()
 
@@ -274,7 +274,7 @@ def main():
             return
     except:
         print("❌ Cannot connect to server!")
-        print("Please make sure the server is running at http://127.0.0.1:8001")
+        print("Please make sure the server is running at http://127.0.0.1:8000")
         return
 
     # Run evaluation

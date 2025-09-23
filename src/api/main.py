@@ -8,7 +8,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from pydantic import BaseModel, ConfigDict, Field, validator
+try:  # Pydantic v2
+    from pydantic import BaseModel, Field, ConfigDict
+    from pydantic import validator  # type: ignore
+    PYDANTIC_V2 = True
+except Exception:  # Pydantic v1 fallback
+    from pydantic import BaseModel, Field  # type: ignore
+    PYDANTIC_V2 = False
 from sqlalchemy.orm import Session
 from sqlalchemy import func, desc
 from contextlib import asynccontextmanager
@@ -23,7 +29,7 @@ import httpx
 
 # Import our optimized modules
 from src.config.settings import *
-from src.models.database import get_db, HealthContent, UserInteraction, HealthMetrics, initialize_database
+from src.models.database import get_db, HealthContent, UserInteraction, initialize_database
 from src.utils.helpers import (
     health_response_generator,
     performance_monitor,
@@ -105,7 +111,7 @@ else:
         "https://*.vercel.app",
         "http://localhost:3000",
         "http://localhost:8000",
-        "http://127.0.0.1:8001"
+        "http://127.0.0.1:8000"
     ]
 
 app.add_middleware(
@@ -120,8 +126,10 @@ app.add_middleware(
 )
 
 # Mount static files with security considerations
-if FRONTEND_DIR.exists():
-    app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
+# Prefer the real static directory; fall back to FRONTEND_DIR if present
+static_source = STATIC_DIR if STATIC_DIR.exists() else FRONTEND_DIR
+if static_source.exists():
+    app.mount("/static", StaticFiles(directory=str(static_source)), name="static")
 
 
 # Simple rate limiting
@@ -173,11 +181,13 @@ async def rate_limit_middleware(request: Request, call_next):
 
 # Enhanced Pydantic models with security validation
 class ChatRequest(BaseModel):
-    model_config = ConfigDict(
-        str_strip_whitespace=True,
-        validate_assignment=True,
-        extra="forbid"
-    )
+    # Pydantic v2 config
+    if PYDANTIC_V2:
+        model_config = ConfigDict(
+            str_strip_whitespace=True,
+            validate_assignment=True,
+            extra="forbid"
+        )
 
     message: str = Field(
         ...,
@@ -198,14 +208,16 @@ class ChatRequest(BaseModel):
         description="Language code (en, hi, or or)"
     )
 
-    @validator('message')
-    def validate_message(cls, v):
-        """Validate and sanitize message content"""
-        return sanitize_input(v)
+    if PYDANTIC_V2:
+        @validator('message')
+        def validate_message(cls, v):
+            """Validate and sanitize message content"""
+            return sanitize_input(v)
 
 
 class ChatResponse(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    if PYDANTIC_V2:
+        model_config = ConfigDict(extra="forbid")
 
     response: str = Field(..., description="Bot response message")
     language: str = Field(..., description="Response language")
@@ -447,7 +459,7 @@ async def health_check(request: Request, db: Session = Depends(get_db)):
     )
 
 
-async def health_check():
+async def _health_check_info():
     """Enhanced health check endpoint"""
     return {
         "status": "healthy",
@@ -529,10 +541,15 @@ async def get_dashboard():
 async def get_demo():
     """Serve optimized demo interface"""
     try:
-        frontend_file = FRONTEND_DIR / "index.html"
-        if frontend_file.exists():
-            with open(frontend_file, "r", encoding="utf-8") as f:
-                return f.read()
+        # Try project root index.html first, then FRONTEND_DIR
+        candidates = [
+            BASE_DIR / "index.html",
+            FRONTEND_DIR / "index.html"
+        ]
+        for frontend_file in candidates:
+            if frontend_file and frontend_file.exists():
+                with open(frontend_file, "r", encoding="utf-8") as f:
+                    return f.read()
         else:
             return HTMLResponse(
                 """
@@ -561,6 +578,19 @@ async def add_process_time_header(request: Request, call_next):
     process_time = time.time() - start_time
     response.headers["X-Process-Time"] = str(process_time)
     return response
+
+
+# Backward-compatible alias: some clients use '/chat'
+@app.post("/chat", response_model=ChatResponse)
+@secure_endpoint
+async def chat_alias(
+    request_data: ChatRequest,
+    http_request: Request,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db)
+):
+    # type: ignore
+    return await chat(request_data, http_request, background_tasks, db)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,10 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+try:
+    from pydantic import BaseModel  # v1/v2 compatible
+except Exception:  # pragma: no cover
+    from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from database import SessionLocal, HealthContent, UserInteraction, get_db

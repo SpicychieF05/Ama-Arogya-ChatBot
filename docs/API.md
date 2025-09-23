@@ -5,7 +5,7 @@ Currently, the API does not require authentication, but this can be easily added
 
 ## Base URL
 ```
-http://localhost:8001
+http://localhost:8000
 ```
 
 ## Endpoints
