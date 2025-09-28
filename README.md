@@ -505,6 +505,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 *Project maintained and developed by the Arogya Allies team.*
 ---
-*Team ID - coming*
+*Team ID - 61328*
 ---
 *Smart India Hackathon 2025*
