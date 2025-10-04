@@ -439,7 +439,7 @@ python -m pytest test_api.py -v --cov=main --cov-report=html
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This is not licensed yet. However, using any file from this repository for any purpose is strictly prohibited. ❌❌❌
 
 ## 🆘 Support & Troubleshooting
 
